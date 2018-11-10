@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/node:latest
@@ -36,7 +36,7 @@ jobs:
       # run tests!
       - run: yarn test
 
-  deploy-job:
+  deploy:
       docker:
         # specify the version you desire here
         - image: circleci/node:latest
@@ -75,10 +75,10 @@ workflows:
   version: 2
   production:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build:
           filters:
             branches:
               only: master
