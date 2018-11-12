@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "./node_modules/.bin/surge --project ./build --domain trilnh92.surge.sh"
+    "deploy": "./node_modules/.bin/surge --project ./build --domain https://trilnh92.surge.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
