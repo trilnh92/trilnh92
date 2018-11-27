@@ -1,6 +1,6 @@
 version: 2
 jobs: 
-  build: 
+  install: 
     docker: 
       - 
         image: "circleci/node:latest"
@@ -26,16 +26,26 @@ jobs:
           key: "dependency-cache-{{ checksum \"package.json\" }}"
           paths: 
             - node_modules
-      - 
-        run: 
-          command: "npm run build"
-          name: "Build the web application"
     working_directory: ~/trilnh92
-  deploy: 
-    docker: 
+  build: 
+     docker: 
       - 
         image: "circleci/node:latest"
-    steps: 
+     steps: 
+      - checkout
+      - 
+        restore_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+      - 
+       run: 
+          command: "npm run build"
+          name: "Build the web application"
+     working_directory: ~/trilnh92    
+  deploy: 
+     docker: 
+      - 
+        image: "circleci/node:latest"
+     steps: 
       - checkout
       - 
         restore_cache: 
@@ -44,6 +54,7 @@ jobs:
         run: 
           command: "npm run deploy"
           name: "Delpoy the build"
+     working_directory: ~/trilnh92      
   test: 
     docker: 
       - 
@@ -71,7 +82,13 @@ workflows:
   version: 2
   build_and_deploy: 
     jobs: 
-      - build
+      - install
+      - 
+        build: 
+          requires: install
+          filters:
+            branches:
+                only: master
       # Skip test
       #- 
         #test: 
