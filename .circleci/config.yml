@@ -26,10 +26,7 @@ jobs:
           key: "dependency-cache-{{ checksum \"package.json\" }}"
           paths: 
             - node_modules
-      - 
-        run: 
-          command: "npm run build"
-          name: "Build the web application"
+      
     working_directory: ~/trilnh92
   deploy: 
     docker: 
@@ -39,20 +36,11 @@ jobs:
       - checkout
       - 
         restore_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"
+          key: "dependency-cache-{{ checksum \"package.json\" }}"      
       - 
         run: 
-          command: "npm install"
-          name: "Install npm"
-      -
-        run: 
-          command: "npm audit fix --force"
-          name: "Fix npm audit"
-      - 
-        save_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"
-          paths: 
-            - node_modules    
+          command: "npm run build"
+          name: "Build the web application"
       - 
         run: 
           command: "npm run deploy"
