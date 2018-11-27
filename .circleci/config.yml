@@ -17,6 +17,10 @@ jobs:
         run: 
           command: "npm install"
           name: "Install npm wee"
+      -
+        run: 
+          command: "npm audit fix --force"
+          name: "Fix npm audti"
       - 
         save_cache: 
           key: "dependency-cache-{{ checksum \"package.json\" }}"
