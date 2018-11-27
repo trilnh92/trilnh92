@@ -40,6 +40,11 @@ jobs:
       - 
         restore_cache: 
           key: "dependency-cache-{{ checksum \"package.json\" }}"
+      # Only for this project because the source deployed to surge
+      - 
+        run: 
+          command: "npm i -g surge@latest"
+          name: "Install Surge"
       - 
         run: 
           command: "npm run deploy"
@@ -72,13 +77,14 @@ workflows:
   build_and_deploy: 
     jobs: 
       - build
-      - 
-        test: 
-          filters: 
-            branches: 
-              only: master
-          requires: 
-            - build
+      # Skip test
+      #- 
+        #test: 
+          #filters: 
+            #branches: 
+              #only: master
+          #requires: 
+            #- build
       - 
         deploy: 
           filters: 
