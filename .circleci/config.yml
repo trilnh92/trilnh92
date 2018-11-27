@@ -54,10 +54,10 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Build
+          name: Build web application
           command: npm run build
       - run:
-          name: Deploy code coverage
+          name: Deploy the build
           command: './node_modules/.bin/surge --project ./build --domain trilnh92.surge.sh'
 workflows:
   version: 2
