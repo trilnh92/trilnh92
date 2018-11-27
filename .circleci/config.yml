@@ -16,7 +16,7 @@ jobs:
       - 
         run: 
           command: "npm install"
-          name: "Install npm wee"
+          name: "Install npm"
       -
         run: 
           command: "npm audit fix --force"
@@ -40,6 +40,19 @@ jobs:
       - 
         restore_cache: 
           key: "dependency-cache-{{ checksum \"package.json\" }}"
+      - 
+        run: 
+          command: "npm install"
+          name: "Install npm"
+      -
+        run: 
+          command: "npm audit fix --force"
+          name: "Fix npm audit"
+      - 
+        save_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+          paths: 
+            - node_modules    
       - 
         run: 
           command: "npm run deploy"
