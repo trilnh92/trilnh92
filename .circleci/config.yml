@@ -20,7 +20,7 @@ jobs:
       -
         run: 
           command: "npm audit fix --force"
-          name: "Fix npm audti"
+          name: "Fix npm audit"
       - 
         save_cache: 
           key: "dependency-cache-{{ checksum \"package.json\" }}"
@@ -40,11 +40,6 @@ jobs:
       - 
         restore_cache: 
           key: "dependency-cache-{{ checksum \"package.json\" }}"
-      # Only for this project because the source deployed to surge
-      - 
-        run: 
-          command: "npm i -g surge@latest"
-          name: "Install Surge"
       - 
         run: 
           command: "npm run deploy"
