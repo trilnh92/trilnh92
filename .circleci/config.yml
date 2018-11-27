@@ -1,101 +1,63 @@
 version: 2
-jobs: 
-  build: 
-    docker: 
-      - 
-        image: "circleci/node:latest"
-    steps: 
-      - checkout
-      - 
-        run: 
-          command: "sudo npm install -g npm@latest"
-          name: "Update npm"
-      - 
-        restore_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"
-      - 
-        run: 
-          command: "npm install"
-          name: "Install npm"
-      -
-        run: 
-          command: "npm audit fix --force"
-          name: "Fix npm audit"
-      - 
-        save_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"
-          paths: 
-            - node_modules
-      
+jobs:
+  build:
     working_directory: ~/trilnh92
-  deploy: 
-    docker: 
-      - 
-        image: "circleci/node:latest"
-    steps: 
+    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    docker:
+      - image: circleci/latest
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:3.4.4-jessie
+    steps:
       - checkout
-      - 
-        restore_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"      
-      - 
-        run: 
-          command: "npm install"
-          name: "Install npm"
-      -
-        run: 
-          command: "npm audit fix --force"
-          name: "Fix npm audit"
-      - 
-        save_cache: 
-          key: "dependency-cache-{{ checksum \"package.json\" }}"
-          paths: 
-            - node_modules
-      - 
-        run: 
-          command: "npm run build"
-          name: "Build the web application"
-      - 
-        run: 
-          command: "npm run deploy"
-          name: "Delpoy the build"
-  test: 
-    docker: 
-      - 
-        image: "circleci/node:latest"
-    steps: 
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules  
+  test:
+    docker:
+      - image: circleci/node:4.8.2-jessie
+      - image: mongo:3.4.4-jessie
+    steps:
       - checkout
-      - 
-        run: 
-          command: "npm test"
+      - run:
           name: Test
-      - 
-        run: 
-          command: "./node_modules/.bin/nyc report --reporter=text-lcov"
-          name: "Generate code coverage"
-      - 
-        store_artifacts: 
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts:
           path: test-results.xml
           prefix: tests
-      - 
-        store_artifacts: 
+      - store_artifacts:
           path: coverage
           prefix: coverage
-
-workflows: 
+  deploy:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Deploy code coverage
+          command: './node_modules/.bin/surge --project ./build --domain trilnh92.surge.sh'
+workflows:
   version: 2
-  deploy-job: 
-    jobs: 
-      #- deploy
-      # Skip test
-      #- 
-        #test: 
-          #filters: 
-            #branches: 
-              #only: master
-          #requires: 
-            #- build
-      - 
-        deploy
-          filters
-            branches
-              only master
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
