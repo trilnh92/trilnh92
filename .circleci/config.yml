@@ -1,68 +1,84 @@
 version: 2
-jobs:
-	build:
-		working_directory: ~/trilnh92
-		# The primary container is an instance of the first image listed. The job's commands run in this container.
-		docker:
-		   - image: circleci/node:latest	
-		steps:
-		  - checkout
-		  - run:
-			  name: Update npm
-			  command: 'sudo npm install -g npm@latest'
-		  - restore_cache:
-			  key: dependency-cache-{{ checksum "package.json" }}
-		  - run:
-			  name: Install npm wee
-			  command: npm install
-		  - save_cache:
-			  key: dependency-cache-{{ checksum "package.json" }}
-			  paths:
-				- node_modules
-		  - run:
-				name: Build the web application
-				command: npm run build      
-    test:
-		docker:
-		  - image: circleci/node:latest		
-		steps:
-		  - checkout
-		  - run:
-			  name: Test
-			  command: npm test
-		  - run:
-			  name: Generate code coverage
-			  command: './node_modules/.bin/nyc report --reporter=text-lcov'
-		  - store_artifacts:
-			  path: test-results.xml
-			  prefix: tests
-		  - store_artifacts:
-			  path: coverage
-			  prefix: coverage
-	deploy:
-		docker:
-			- image: circleci/node:latest			
-		steps:
-			- checkout
-			- restore_cache:
-				key: dependency-cache-{{ checksum "package.json" }}        
-			- run:
-				name: Delpoy the build
-				command: npm run deploy
-workflows:
-  version: 2
-  build_and_deploy
-    jobs:
+jobs: 
+  build: 
+    docker: 
+      - 
+        image: "circleci/node:latest"
+    steps: 
+      - checkout
+      - 
+        run: 
+          command: "sudo npm install -g npm@latest"
+          name: "Update npm"
+      - 
+        restore_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+      - 
+        run: 
+          command: "npm install"
+          name: "Install npm wee"
+      - 
+        save_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+          paths: 
+            - node_modules
+      - 
+        run: 
+          command: "npm run build"
+          name: "Build the web application"
+    working_directory: ~/trilnh92
+  deploy: 
+    docker: 
+      - 
+        image: "circleci/node:latest"
+    steps: 
+      - checkout
+      - 
+        restore_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+      - 
+        run: 
+          command: "npm run deploy"
+          name: "Delpoy the build"
+  test: 
+    docker: 
+      - 
+        image: "circleci/node:latest"
+    steps: 
+      - checkout
+      - 
+        run: 
+          command: "npm test"
+          name: Test
+      - 
+        run: 
+          command: "./node_modules/.bin/nyc report --reporter=text-lcov"
+          name: "Generate code coverage"
+      - 
+        store_artifacts: 
+          path: test-results.xml
+          prefix: tests
+      - 
+        store_artifacts: 
+          path: coverage
+          prefix: coverage
+
+workflows: 
+  build_and_deploy: 
+    jobs: 
       - build
-      - test
-          requires:
-            - build
-          filters:
-              branches:
-                only: master  
-      - deploy
-          requires:
-            - build
-          filters:
-            branches:
+      - 
+        test: 
+          filters: 
+            branches: 
               only: master
+          requires: 
+            - build
+      - 
+        deploy: 
+          filters: 
+            branches: 
+              only: master
+          requires: 
+            - build
+
