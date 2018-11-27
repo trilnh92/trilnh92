@@ -39,6 +39,19 @@ jobs:
           key: "dependency-cache-{{ checksum \"package.json\" }}"      
       - 
         run: 
+          command: "npm install"
+          name: "Install npm"
+      -
+        run: 
+          command: "npm audit fix --force"
+          name: "Fix npm audit"
+      - 
+        save_cache: 
+          key: "dependency-cache-{{ checksum \"package.json\" }}"
+          paths: 
+            - node_modules
+      - 
+        run: 
           command: "npm run build"
           name: "Build the web application"
       - 
@@ -72,7 +85,7 @@ workflows:
   version: 2
   build_and_deploy: 
     jobs: 
-      - build
+      #- build
       # Skip test
       #- 
         #test: 
@@ -82,7 +95,7 @@ workflows:
           #requires: 
             #- build
       - 
-        deploy: 
+        deploy
           filters: 
             branches: 
               only: master
