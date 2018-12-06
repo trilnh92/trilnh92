@@ -4,9 +4,6 @@ import './ComingSoon.scss';
 const bgImg = require('../../assets/images/background-1600x900.jpg');
 
 class ComingSoon extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         document.title = "Coming Soon | Tri Le Nguyen Huu";
@@ -26,6 +23,5 @@ class ComingSoon extends Component {
         )
     }
 }
-
 
 export default ComingSoon;
