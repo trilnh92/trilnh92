@@ -1,0 +1,49 @@
+@import "../../assets/scss/base/colors";
+
+.coming-soon {
+  height: 100vh;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    opacity: .5;
+    background-image: radial-gradient(circle, #2f4858, #4c5881, #8b5f97, #ce618d, #fa7268);
+  }
+
+  &__container {
+    z-index: 2;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    color: $white;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  &-title {
+    color: $white;
+    padding: 0;
+    margin: 0;
+  }
+
+  &-description {
+    margin: 20px auto;
+    max-width: 450px;
+    line-height: 30px;
+  }
+
+}
