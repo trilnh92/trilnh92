@@ -1,9 +1,13 @@
 
-## Link
+### Production Link
 https://trilnh92.surge.sh
 
-## Content
+### Content
 This my place to display about me, portfolio, contact and many more
 
-## Technologies
-React
+### Technologies
+- HTML
+- CSS / SCSS
+- React
+
+### Project Folder Structure
