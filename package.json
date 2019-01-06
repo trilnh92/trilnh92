@@ -1,33 +1,58 @@
 {
-  "name": "trilnh92",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "bootstrap": "^4.1.3",
-    "node-sass": "^4.11.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.2",
-    "reactstrap": "^6.5.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "./node_modules/.bin/surge --project ./build --domain https://trilnh92.surge.sh"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "surge": "^0.20.1"
-  }
+    "name": "trilnh92",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "bootstrap": "^4.2.1",
+        "mobx": "^5.8.0",
+        "mobx-react": "^5.4.3",
+        "node-sass": "^4.11.0",
+        "react": "^16.7.0",
+        "react-app-rewire-mobx": "^1.0.9",
+        "react-dom": "^16.7.0",
+        "react-progressive-image": "^0.6.0",
+        "react-router-dom": "^4.3.1",
+        "react-scripts": "2.1.3",
+        "react-select": "^2.2.0",
+        "reactstrap": "^7.0.2"
+    },
+    "scripts": {
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "lint": "eslint **/*.js --ignore-pattern node_modules/",
+        "test": "react-app-rewired test --env=jsdom",
+        "eject": "react-app-rewired eject",
+        "server": "http-server ./build -p 9000 -o",
+        "prod": "npm run build && npm run server",
+        "deploy": "./node_modules/.bin/surge --project ./build --domain https://trilnh92.surge.sh"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "babel-plugin-styled-components": "^1.10.0",
+        "customize-cra": "^0.2.9",
+        "babel-eslint": "^9.0.0",
+        "eslint": "^5.6.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-config-prettier": "^3.3.0",
+        "eslint-config-react-app": "^3.0.6",
+        "eslint-plugin-flowtype": "^3.2.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-prettier": "^3.0.1",
+        "eslint-plugin-react": "^7.12.3",
+        "husky": "^1.3.1",
+        "lint-staged": "^8.1.0",
+        "prettier": "^1.15.3",
+        "pretty-quick": "^1.8.0",
+        "react-app-rewired": "^2.0.1",
+        "surge": "^0.20.1"
+    }
 }

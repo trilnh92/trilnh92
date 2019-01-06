@@ -1,6 +1,6 @@
 
 ### Production Link
-https://trilnh92.surge.sh
+https://trilnh92.netlify.com
 
 ### Content
 This my place to display about me, portfolio, contact and many more
@@ -19,7 +19,7 @@ This my place to display about me, portfolio, contact and many more
 - [ ] About page
 - [ ] Server Side Rendering
 - [ ] Code Splitting
-- [ ] State Management
+- [x] State Management
 - [ ] Progressive Web Application
 - [ ] Critical CSS
 
