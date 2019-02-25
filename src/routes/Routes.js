@@ -1,5 +1,5 @@
 import React, {Suspense, lazy} from 'react';
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import {HashRouter  as Router, Redirect, Route, Switch} from 'react-router-dom';
 
 import {AuthService} from "../services/AuthService"
 import Homepage from "../container/Homepage/Homepage";
