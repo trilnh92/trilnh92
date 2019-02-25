@@ -1,4 +1,8 @@
-### Production Link
+
+### Deploy status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5e1950c1-4728-4b6c-8973-dc298dbbb5e0/deploy-status)](https://app.netlify.com/sites/trilnh92/deploys)
+
+### Production Link 
 https://trilnh92.netlify.com
 
 ### Content
