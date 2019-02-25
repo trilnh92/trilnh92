@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 
-import './App.scss';
-import ComingSoon from "../components/ComingSoon/ComingSoon";
-
 import {BrowserRouter as Router,
     Route,
     Link,
-    Switch,
-    Redirect
+    Switch
 } from 'react-router-dom';
 import Homepage from "./Homepage/Homepage";
 import About from "./About/About";
 import Portfolio from "./Portfolio/Portfolio";
+import ComingSoon from "../components/ComingSoon/ComingSoon";
+import './App.scss';
 
 class App extends Component {
     render() {

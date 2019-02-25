@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bulma/css/bulma.css';
 import './assets/scss/main.scss';
 import * as serviceWorker from './serviceWorker';
 import RoutingConfig from "./routes/Routes";
+
 
 ReactDOM.render(
     <RoutingConfig />

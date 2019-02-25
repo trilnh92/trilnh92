@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 class Layout extends Component {
     render() {
         return (
-            <section className="page-container">
+            <section className="container-fluid">
                 <Header/>
                 {this.props.children}
                 <Footer/>

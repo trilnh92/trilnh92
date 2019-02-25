@@ -1,22 +1,27 @@
 import React, {Component} from "react";
-import './Header.scss';
 import {Link} from "react-router-dom";
+
 import {AuthStatus} from "../../services/AuthStatus";
+import Menu from './Menu';
+import './Header.scss';
 
 class Header extends Component {
 
     render() {
         return (
             <header className="header">
-                <h2>This is header.</h2>
-                <ul>
-                    <li><Link to="/">Homepage</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/portfolio">Portfolio</Link></li>
-                </ul>
-
+                <Menu/>
                 {/*<AuthStatus/>*/}
-
+                <section className="section">
+                    <div className="container">
+                        <h1 className="title">
+                            Hello World
+                        </h1>
+                        <p className="subtitle">
+                            My first website with <strong>Bulma</strong>!
+                        </p>
+                    </div>
+                </section>
             </header>
         )
     }
