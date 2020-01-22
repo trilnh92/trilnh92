@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import './Portfolio.scss';
 
 class Portfolio extends Component {
@@ -11,6 +11,9 @@ class Portfolio extends Component {
         return (
             <section className="portfolio">
                 <h2>This is Portfolio page.</h2>
+                <div>
+                    <Link to="https://articles-portal.netlify.com/">Articles Portal</Link>
+                </div>
             </section>
         )
     }
