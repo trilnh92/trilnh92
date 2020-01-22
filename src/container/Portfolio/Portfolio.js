@@ -12,7 +12,7 @@ class Portfolio extends Component {
             <section className="portfolio">
                 <h2>This is Portfolio page.</h2>
                 <div>
-                    <Link to="https://articles-portal.netlify.com/">Articles Portal</Link>
+                    <a  target="_blank" href="https://articles-portal.netlify.com/">Articles Portal</a>
                 </div>
             </section>
         )
