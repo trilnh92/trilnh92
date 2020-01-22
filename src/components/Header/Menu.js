@@ -9,8 +9,8 @@ class Menu extends Component {
             <nav>
                 <ul>
                     <li><Link to="/">Homepage</Link></li>
-                    <li><Link to="/about">About</Link></li>
                     <li><Link to="/portfolio">Portfolio</Link></li>
+                    <li><Link to="/about">About</Link></li>
                 </ul>
             </nav>
         )
